@@ -1,23 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Button, Input } from 'react-native';
-import Form from "./src/components/Form/"
-import Title from './src/components/Title';
-let username = "Maria";
+import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import Login from './src/Login'
+import Register from './src/Register'
+import Home from './src/Home'
+
+
+
+
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Title/>
-      <Form/>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Login" component={Login} options={{title: "Bem-vindo!"}}/>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Register" component={Register} />
+         
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
-
-function brandowFeio() {
-  username ="BRANDOW";
-  
-  console.log("AOBA");
 }
 
 const styles = StyleSheet.create({

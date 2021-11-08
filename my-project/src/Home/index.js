@@ -1,8 +1,21 @@
 import React, { useState } from "react"
 import { View, Text, TextInput, Button } from "react-native"
 import ResultImc from "./ResultImc";
+import { Wrapper, WrapperInput, WrapperText } from './styles'
 
-export default function Form() {
+import {actualUser} from './../Login/'
+
+export const imctestes = [];
+const user = actualUser;
+
+function Imc (username, altura, peso, imc){
+    this.username = username;
+    this.altura = altura;
+    this.peso = peso;
+    this.imc = imc;
+}
+
+export default function Form({navigation}) {
 
     const [height, setHeight] = useState(null);
     const [weight, setWeight] = useState(null);
@@ -16,8 +29,12 @@ export default function Form() {
     function validationIMC() {
         if (weight != null && height != null) {
             let imcCalculo = imcCalculator();
+           const imcss = new Imc(user[0].username, height, weight,imcCalculo)
+            imctestes.push(imcss);
             setHeight(null);
             setWeight(null);
+            
+
             setImc(imcCalculo)
             if (imcCalculo < 18.5) {
                 setMessageIMC("Está abaixo do Peso.");
@@ -34,7 +51,7 @@ export default function Form() {
             }
 
             setTextButton("Calcular Novamente");
-            return
+            console.log(imctestes)
         }else{
 
             setHeight(null);
@@ -46,25 +63,29 @@ export default function Form() {
     }
 
     return (
-
+        <Wrapper>
+           
         <View>
-            <View>
+            <View style={{alignItems:"center"}}>
                 <Text>Altura</Text>
-                <TextInput placeholder="Ex. 1.75"
+                <WrapperInput placeholder="Ex. 1.75"
                     onChangeText={setHeight}
                     value={height}
                     keyboardType="numeric" />
 
-                <Text>Peso</Text>
-                <TextInput placeholder="Ex. 65.2"
+                <WrapperText>Peso</WrapperText>
+                <WrapperInput placeholder="Ex. 65.2"
                     value={weight}
                     onChangeText={setWeight}
                     keyboardType="numeric" />
 
                 <Button title={textButton} onPress={() => validationIMC()} />
+               
             </View>
-            <ResultImc messageResultImc={messageIMC} resultImc={imc} />
+            
+            <ResultImc messageResultImc={messageIMC} resultImc={imc}/>
         </View >
+        </Wrapper>
     )
 
 
