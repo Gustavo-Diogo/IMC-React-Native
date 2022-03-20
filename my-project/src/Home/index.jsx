@@ -3,7 +3,7 @@ import { View, Text, TextInput, Button } from "react-native"
 import ResultImc from "./ResultImc";
 import { Wrapper, WrapperInput, WrapperText } from './styles'
 
-import {actualUser} from './../Login/'
+import {actualUser} from '../Login'
 
 export const imctestes = [];
 const user = actualUser;
